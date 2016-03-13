@@ -36,5 +36,30 @@ class arry
           }
         }
      }
-     
+     void outputdata()
+     {
+        nt i;
+  	    for(i=0;i<length;i++)
+  	     {
+  	   	   cout<<p[i]<<'\t';
+       	}
+  	   cout<<endl;
+    }
+  private:
+      int length;
+      T *p;
 };
+template<class T>
+bool sortdirection(T a,T b)
+{
+  return a>b;//指明升序
+ // return a<b;//指明降序
+}
+int main(int argc, char const *argv[])
+{
+   array<int> a1[5];//类型按需要设置
+   a1.inputdata();
+	 a1.sortelement(sortdirection);
+	 a1.outputdata();
+   return 0;
+}
