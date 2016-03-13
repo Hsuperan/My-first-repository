@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+//定义实现排序函数指针类型
+template<class T>
+class arry
+{
+  typedef bool (*sortfunp)(T a,T b);
+  public :
+     arry(int _length)
+     {
+       length=_length;
+       p=new T[length];
+     }
+     void inputdata()
+     {
+       int i;
+       for(i=0;i<length;i++)
+       {
+         cin<<p[i];
+       }
+     }
+     //指定排序方式，fp：在类外，可以指定排序方式
+     void sortelsment(sortfun fp)
+     {
+        int i,j;
+        for(i=0;i<length;i++)
+        {
+          for(j=0;j<length-i-1;j++)
+          {
+            if(fp(p[j],p[j+1]))
+            {
+              T tmp=p[j];
+    		    	p[j]=p[j+1];
+    		    	p[j+1]=tmp;
+            }
+          }
+        }
+     }
+     
+};
