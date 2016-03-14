@@ -1,0 +1,87 @@
+#include <iostream>
+using namespace std;
+
+//前置声明模板链表，size 表示输入链表的节点个数。函数参数默认值
+template <class T,int size=10>
+class list;
+
+//构造节点，模板类
+template<class T>
+class node
+{
+ friend class list<T>;//友云类声明
+  public:
+     node()
+     {
+       //初始化指针
+       next=NULL;
+     }
+     
+     //构造节点
+     node(T _data)
+     {
+        data=_data;
+        next=NULL;
+     }
+  private:
+     T data;
+     node<T> *next;
+};
+
+//由于前面声明中size已经设置默认参数，这里不再设置
+template <class T,int size>
+class list
+{
+  public:
+       list()
+       {
+         head=new node<T>();
+         curr=head;
+       }
+       
+       //创建链表节点
+       void create_list()
+       {
+          node <T> *newnode;
+          int i;
+          T _data;
+          for(i=0;i<size:i++)
+          {
+            cin>>_data;
+            newnode=new node<T>(_data);//生成节点
+            curr->next=newnode;
+            curr=newnode;
+            newnode=NULL;
+          }
+       }
+       
+       //输出链表节点
+       void output_list()
+       {
+          curr=head->next;
+          while(NULL!=curr)
+          {
+            cout<<curr->data<<"\t";
+            curr=curr->next;
+          }
+       }
+       //调用析构函数释放资源
+       ~list()
+       	{
+		       if(head!=NULL)
+		         {
+			         delete head;
+			         head=NULL;
+		          }
+	      }
+  private:
+    node<T> *head;//链表的头指针
+    node<T> *curr;//链表的当前指针
+};
+int main(int argc, char const *argv[])
+{
+   list<int> l1;
+   l1.create_list();
+   l1.output_list();
+   return 0;
+}
