@@ -1,0 +1,92 @@
+#include<iostream>
+using namespace std;
+template <class T>
+class stack;
+
+//定义模板类时这种默认类型为int型
+template <class T=int>
+class node
+{
+//定义友云类时模板类时要带上类型
+ friend class stack<T>;
+  public:
+    nade(T _data)
+    {
+       data=_data;
+       next=NULL;
+    }
+  private:
+    T data;
+    node<T> *next;
+};
+
+template <class T=int>
+class stack
+{
+  public:
+       stack()
+       {
+         top=NULL;
+         size=0;
+       }
+       void push(T _data);//声明进栈函数
+       voidpop();//声明出栈函数
+       void isempty();//声明函数判断栈是否为空
+       ~stack()
+       {
+         
+       }
+  private:
+    node<T> *top;//栈顶指针
+    int size; //栈的大小
+}
+
+//将类内的函数成员在内外定义，需指明为模板类，且要用类名限制
+tmplate <class T>
+void stack<T>::push(T _data)
+{
+ //从下向上入栈
+  node<T>*newnode=new node<T>(_data);
+  newnode->next=top;
+  top=newnode;
+  size++;
+  }
+template <class T>
+void stack<T>::pop()
+{
+ //出栈顺序与入栈顺序相反
+   if(!isempty)
+   {
+     node<T>*tmp=top;
+     top=top->next;
+     cout<<tmp->data<<endl;
+     delete tmp;
+     tmp=NULL;
+     size--;
+   }
+}
+template <class T>
+bool stack<T>::isempty()
+{
+   if(size==0)
+   return true;
+   else
+   return false;
+}
+int main(int argc, char const *argv[])
+{
+  stack<> s1;//默认值数据类型（int）
+  stack<double> s1;
+  int i;
+  for(i=0;i<;i++)
+  {
+   //进栈
+    s1.push(i);
+  }
+  for(i=0;i<;i++)
+  {
+   //出栈
+    s1.pop();
+  }
+  return 0;
+}
