@@ -1,0 +1,32 @@
+时间复杂度：最差时间复杂度为O(n^2),最好时间O(n)  
+稳定性: 稳定
+插入排序是排序中比较常见的一种，每一次取一个元素，都要将该元素与之前已经排序好的元素进行比较。
+插入排序算法不需要开辟额外的空间，算法适用于少量数据的排序，都是在原空间上进行移动操作。 
+代码实现:
+void insertion_sorting(int a[],int len)
+{
+  int i,j,tmp;
+  //遍历数组
+  for(i=1;i<len-1;i++)
+  {
+    tmp=a[i];
+    j=i-1;
+    while(j>-1&&a[j]>tmp)  //如果要按降序则是while(j>-1&&a[j]<tmp)
+    {
+      a[j+1]=a[j];
+      j--;
+    }
+    a[i+1]=tmp;
+}
+//测试代码
+int main(int argc, char const *argv[])
+{
+  int array[]={123,456,123,21,35,4563};
+  insertion_sorting(array,6);
+  int i=0;
+  for(i=0;i<6;i++)
+  {
+    printf("%d ",array[i]);
+  }
+  return 0;
+}
