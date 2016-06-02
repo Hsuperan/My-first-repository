@@ -1,0 +1,83 @@
+归并排序
+时间复杂度：O(nlogn)
+空间复杂度：O(n)
+稳定性：稳定
+实现原理：采用分治法（Divide and Conquer）将已有序的子序列合并，
+          得到完全有序的序列；即先使每个子序列有序，再使子序列段
+          间有序。若将两个有序表合并成一个有序表，也叫二路归并。
+代码实现：采用递归方法实现
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXSIZE 10
+
+//实现归并并把结果存放在listl中
+void Merging(int *listl,int list_Size,int *listr,int listr_Size)
+{
+  int tmp[MAXSIZE];//临时数组存放排序好的数据
+  int i,j,k;//i 为listl的下标 ， j 为listr的下标 ，k 为tmp的下标
+  i=j=k=0;
+  while( i < listl_Size && j < listl_Size)
+  {
+    //先存储小的数据
+    if( listl[i] < listr[j] )
+    {
+       tmp[k++] = listl[i++];
+    }
+    else
+      tmp[k++] = listr[j++];
+  }
+  
+  //把左边最后剩的大的数追加在最后
+  while( i < listl_Size)
+  {
+   tmp[k++] = listl[i++];
+  }
+  
+  //同理把右边最后剩的大的数追加在最后
+  while( j < listr_Size)
+  {
+   tmp[k++] = listr[j++];
+  }
+  
+  //将临时数组的数据放回listl中
+  int n=0;
+  for( n = 0 ; n < listl_Size + listr_Size ; n++ )
+  {
+    lisrl[n]=tmp[n];
+  }
+}
+
+//归并驱动程序
+void Merge_Sort(int a[],int len)
+{
+  /*递归的条件是数组长度大于1的情况下，否则退出递归*/
+   if(len>1)
+   {
+     int *listl = a;//定义指针指向数组的左半部分
+     int  listl_Size = len/2;
+     int *listr = a + len/2;//指针指向数组的右半部分
+     int listr_Size = len - listl_Size;
+     
+     //递归
+     Merge_Sort(listl,listl_Size);
+     Merge_Sort(listr,listr_Size);
+     
+     //归并
+     Merging(listl,list_Size,listr,listr_Size);
+   }
+}
+
+//测试代码
+int main(int argc, char const *argv[])
+{
+  int array[]={123,56,89,2,65,3};
+  Merge_Sort(array,6);
+  int i;
+  for( i = 0 ; i < 6 ; i++)
+  {
+    printf("%d ",array[i]);
+  }
+  return 0;
+}
+
