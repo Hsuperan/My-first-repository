@@ -36,6 +36,7 @@ void Selcet_sort(int a[],int len)
 int main(int argc, char const *argv[])
 {
   int array[]={1235,5,123,56};
+  Select_sort(array,4);
   int i;
   for(i=0;i<4;i++)
   {
